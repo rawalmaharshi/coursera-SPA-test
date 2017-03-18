@@ -1,0 +1,9 @@
+<ol>
+  <li ng-repeat="item in nidc.found">
+     {{item.name}}, ({{item.shortName}})<br>
+     {{item.description}} 
+    <button ng-click="nidc.onRemove({index: $index});">Don't want this one!</button>
+    <hr>  
+  </li>
+</ol>
+<div class="error" ng-if="nidc.nothingFound();">Nothing Found!</if
