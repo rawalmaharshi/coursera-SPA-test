@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="src/public/user/signup.css">
+<div style="text-align:center">
+    <h2>Sign Up for our Newsletter</h2>
+</div>
+<div class="container" ng-controller="SignUpController as signup">
+  <fieldset>
+      <legend style="color:white">Registration Form</legend>
+      <form class="form-horizontal" name='signupForm' novalidate>
+                     
+        <div class="form-group">  
+            <label for="firstname" class="col-sm-2 control-label">First Name</label>
+            <div class="col-sm-6">
+            <input type="text" name="firstname" class="form-control" style="color:black" placeholder="Your First Name"
+            ng-model="signup.user.firstname" required>
+            <span
+                ng-if=" signupForm.firstname.$error.required && signupForm.firstname.$touched">Please enter your first name
+            </span>
+           </div> 
+        </div>
+            
+         <div class="form-group">  
+            <label for="lastname" class="col-sm-2 control-label">Last Name</label>
+            <div class="col-sm-6">
+            <input type="text" name="lastname" class="form-control" style="color:black" placeholder="Your Last Name"
+            ng-model="signup.user.lastname" required>
+            <span
+                ng-if=" signupForm.lastname.$error.required && signupForm.lastname.$touched">Please enter your last name
+            </span>
+           </div> 
+        </div>
+        
+        <div class="form-group">  
+         <label for="email" class="col-sm-2 control-label">Email</label>
+         <div class="col-sm-6">  
+         <input type="email" name="email" class="form-control" style="color:black" placeholder="Email" ng-model="signup.user.email" required>
+         <span ng-if="signupForm.email.$invalid && signupForm.email.$touched">
+                Must be a valid email address: handle@domain format
+         </span>
+        </div>
+      </div>
+          
+     <div class="form-group">  
+         <label for="phone" class="col-sm-2 control-label">Phone</label>
+         <div class="col-sm-6">      
+        <input type="text" name="phone" class="form-control" style="color:black" placeholder="Phone ###-###-####"
+          ng-model="signup.user.phone"
+          pattern="(\d{3})-(\d{3})-(\d{4})">
+          <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
+            Phone must be in the format ###-###-####.
+          </span>
+         </div>
+    </div>  
+          
+        <div class="form-group">  
+         <label for="fav" class="col-sm-2 control-label">Favorite Dish</label>
+         <div class="col-sm-6">      
+        <input type="text" name="fav" class="form-control" style="color:black" placeholder="Menu Number for your favorite dish"
+          ng-model="signup.user.fav" ng-blur="signup.getFavoriteItem();" required >
+          <span ng-if="signupForm.fav.$invalid && signupForm.fav.$touched">
+            Please enter your favorite dish's short-name
+          </span>
+          <span ng-if="signup.serverResponseStatus == 500 && signupForm.fav.$valid">No such Menu Item exists, Please enter again!
+          </span>
+         </div>
+          <span ng-if="signup.serverResponseStatus == 200">{{signup.favItem.name}}</span>
+    </div>  
+          
+        <button
+          ng-disabled="signupForm.$invalid || signup.favItem == undefined"
+          ng-click="signup.submit()">Submit</button>
+
+          <div style="margin-top: 10px;">
+            Form valid? {{ signupForm.$valid }}  <br>
+            <h4 style="color:grey">{{signup.statusText}}</h4>
+          </div>
+        
+<!--
+          <div >
+          <button ng-click="signup.getFavoriteItem();">Yeh wala Button!</button>
+          </div>
+-->
+      </form>
+  </fieldset>
+</div><!-- Container -->
