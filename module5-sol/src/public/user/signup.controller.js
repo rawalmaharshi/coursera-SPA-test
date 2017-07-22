@@ -22,11 +22,14 @@ function SignUpController(signUpService, ApiPath, $http){
         $ctrl.registrationComplete = true;
         $ctrl.statusText = "Your information has been saved!.";
         signUpService.saveUserData($ctrl.user);  
-    }
+    };
     
       $ctrl.getFavoriteItem = function(){
       return $http.get(ApiPath + '/menu_items/' + $ctrl.user.fav + '.json').then(function successCallback(response) {
         $ctrl.favItem = response.data;
+        //console.log("Favorite Item: " + JSON.stringify($ctrl.favItem));
+        $ctrl.user.favItem = $ctrl.favItem;
+        //console.log("User Info now is: " + JSON.stringify($ctrl.user));
         $ctrl.serverResponseStatus = response.status;
         return response.data; 
       

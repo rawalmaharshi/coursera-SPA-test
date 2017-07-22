@@ -12,7 +12,7 @@ function signUpService($http){
     service.userinfo = {};
     //console.log("save status: " + service.registration);
     
-    service.saveUserData = function(user,registrationComplete){
+    service.saveUserData = function(user){
         service.userinfo = user;
         service.registration = true;
         //console.log("User data in service is: " + JSON.stringify(service.userinfo));
